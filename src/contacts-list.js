@@ -2,10 +2,11 @@ import React from 'react'
 import Contact from './contact'
 
 class ContactsList extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      search: ''
+      search: '',
+      contacts: props.contacts
     }
   }
 
@@ -13,18 +14,41 @@ class ContactsList extends React.Component {
     this.setState({search: event.target.value})
   }
 
+  addContact(event) {
+    event.preventDefault()
+
+    let name = this.refs.name.value
+    let phone = this.refs.phone.value
+    this.setState({
+      contacts: this.state.contacts.concat({
+        name,
+        phone
+      })
+    })
+    this.refs.name.value = ''
+    this.refs.phone.value = ''
+  }
+
   render() {
-    let filteredContacts = this.props.contacts.filter( contact => {
+    let filteredContacts = this.state.contacts.filter(contact => {
       return contact.name.toLowerCase()
-                    .indexOf(this.state.search.toLowerCase()) !== -1
+             .indexOf(this.state.search.toLowerCase()) !== -1
     })
 
     return (
       <div>
         <input type="text"
+          placeholder="Search"
           value={this.state.search}
           onChange={this.updateSearch.bind(this)}
         />
+        <hr />
+        <form onSubmit={this.addContact.bind(this)}>
+          <input placeholder="Name" type="text" ref="name" />
+          <input placeholder="Phone" type="text" ref="phone" />
+          <button type="submit">Add new contact</button>
+        </form>
+
         <ul>
           {
             filteredContacts.map( contact => {
