@@ -5,7 +5,7 @@ class ContactsList extends React.Component {
   constructor() {
     super()
     this.state = {
-      search: 'React'
+      search: ''
     }
   }
 
@@ -14,11 +14,16 @@ class ContactsList extends React.Component {
   }
 
   render() {
+    let filteredContacts = this.props.contacts.filter( contact => {
+      return contact.name.toLowerCase()
+                    .indexOf(this.state.search.toLowerCase()) !== -1
+    })
+
     return (
       <div>
         <ul>
           {
-            this.props.contacts.map( contact => {
+            filteredContacts.map( contact => {
                 return <Contact key={contact.name} contact={contact}/>
             })
           }
