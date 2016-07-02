@@ -21,6 +21,10 @@ class ContactsList extends React.Component {
 
     return (
       <div>
+        <input type="text"
+          value={this.state.search}
+          onChange={this.updateSearch.bind(this)}
+        />
         <ul>
           {
             filteredContacts.map( contact => {
@@ -28,10 +32,6 @@ class ContactsList extends React.Component {
             })
           }
         </ul>
-        <input type="text"
-          value={this.state.search}
-          onChange={this.updateSearch.bind(this)}
-        />
       </div>
     )
   }
