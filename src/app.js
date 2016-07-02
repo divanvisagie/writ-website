@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ContactsList from './contacts-list'
+import ContactsList from './components/contact-list/contact-list'
 
 let contacts = [{
   name: 'John',
@@ -19,7 +19,6 @@ class App extends React.Component {
       </div>
     )
   }
-
 }
 
 ReactDOM.render(<App contacts={contacts} />, document.getElementById('app'))

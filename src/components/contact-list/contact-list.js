@@ -1,13 +1,20 @@
 import React from 'react'
-import Contact from './contact'
+import Contact from '../contact/contact'
+import HttpService from '../../services/http-service/http-service'
 
-class ContactsList extends React.Component {
+class ContactList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       search: '',
       contacts: props.contacts
     }
+
+    const httpService = HttpService()
+    console.log('getting')
+    httpService.get('/ping')
+      .map(word => `response is ${word}`)
+      .onValue(word => console.log(word))
   }
 
   updateSearch (event) {
@@ -61,4 +68,4 @@ class ContactsList extends React.Component {
   }
 }
 
-export default ContactsList
+export default ContactList

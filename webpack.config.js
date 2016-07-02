@@ -20,6 +20,12 @@ module.exports = {
       loader: 'babel'
     }]
   },
+  proxy: {
+    '/api*': {
+      target: 'http://localhost:9999',
+      secure: false
+    }
+  },
   devtool: 'source-map',
   resolve: {
     extensions: ['', '.js', '.jsx']
