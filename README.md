@@ -4,3 +4,10 @@
 
 
 A seed project for react using webpack and es6
+
+
+## Running
+
+```sh
+npm install webpack -g
+```

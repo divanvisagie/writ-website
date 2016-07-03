@@ -24,9 +24,8 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     new webpack.ResolverPlugin(
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main']
+      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
     )
-   )
   ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
