@@ -1,4 +1,5 @@
 let path = require('path')
+let webpack = require('webpack')
 
 module.exports = {
   entry: [
@@ -20,14 +21,15 @@ module.exports = {
       loader: 'babel'
     }]
   },
-  proxy: {
-    '/api*': {
-      target: 'http://localhost:9999',
-      secure: false
-    }
-  },
   devtool: 'source-map',
+  plugins: [
+    new webpack.ResolverPlugin(
+      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main']
+    )
+   )
+  ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['node_modules', 'bower_components']
   }
 }

@@ -12,9 +12,9 @@ class ContactList extends React.Component {
 
     const httpService = HttpService()
     console.log('getting')
-    httpService.get('/ping')
-      .map(word => `response is ${word}`)
+    httpService.get('/ping','text')
       .onValue(word => console.log(word))
+
   }
 
   updateSearch (event) {

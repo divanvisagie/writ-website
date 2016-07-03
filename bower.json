@@ -1,0 +1,21 @@
+{
+  "name": "react-seed",
+  "description": "ReactJS seed",
+  "main": "index.js",
+  "authors": [
+    "Divan Visagie <visagiedivan@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/divanvisagie/react-seed",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
