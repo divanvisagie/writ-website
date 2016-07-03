@@ -1,14 +1,14 @@
-var express = require('express')
-var path = require('path')
-var webpackConfig = require('./webpack.config')
-var webpack = require('webpack')
-var webpackDevMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
-var proxyMiddleware = require('http-proxy-middleware')
+let express = require('express')
+let path = require('path')
+let webpackConfig = require('./webpack.config')
+let webpack = require('webpack')
+let webpackDevMiddleware = require('webpack-dev-middleware')
+let webpackHotMiddleware = require('webpack-hot-middleware')
+let proxyMiddleware = require('http-proxy-middleware')
 
-var devConfig = webpackConfig.devServer
-var app = express()
-var compiler = webpack(webpackConfig)
+let devConfig = webpackConfig.devServer
+let app = express()
+let compiler = webpack(webpackConfig)
 
 app.use(express.static(devConfig.contentBase || __dirname))
 app.use(webpackDevMiddleware(compiler, {}))

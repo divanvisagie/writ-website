@@ -3,7 +3,8 @@ let webpack = require('webpack')
 
 module.exports = {
   entry: [
-    './src/app.js'
+    './src/app.js',
+    'webpack-hot-middleware/client?reload=true'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -25,7 +26,10 @@ module.exports = {
   plugins: [
     new webpack.ResolverPlugin(
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
-    )
+    ),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ],
   devServer: {
     port: 8080,
