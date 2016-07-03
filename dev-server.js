@@ -1,3 +1,4 @@
+'use strict'
 let express = require('express')
 let path = require('path')
 let webpackConfig = require('./webpack.config')

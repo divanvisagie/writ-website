@@ -1,4 +1,3 @@
-// let fetch = {}
 import path from 'path'
 import 'whatwg-fetch'
 import Bacon from 'baconjs'
@@ -6,27 +5,39 @@ import Bacon from 'baconjs'
 function HttpService () {
   const root = '/api'
 
-  const settings = {
-    credentials: 'include'
+  function match (pattern) {
+    return function (matchers) {
+      let execution = matchers[pattern] || matchers._
+      return execution
+    }
   }
 
-  const responseTypeMap = {
+  const typeMatchers = {
     json: response => response.json(),
-    text: response => response.text()
+    _: response => response.text()
   }
 
   return {
     get (url, type = 'json') {
-      let fetchPath = path.join(root, url)
-      const promise = fetch(fetchPath, settings)
-        .then(responseTypeMap[type])
-
-      const stream = Bacon.fromPromise(promise)
-      return stream
+      const fetchPath = path.join(root, url)
+      const promise = fetch(fetchPath)
+        .then(match(type)(typeMatchers))
+      return Bacon.fromPromise(promise)
     },
 
     post (url, data, type = 'json') {
-      console.log(url, data)
+      const fetchPath = path.join(root, url)
+      const json = JSON.stringify(data)
+      console.log(json)
+      const promise = fetch(fetchPath , {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: json
+      }).then(match(type)(typeMatchers))
+      return Bacon.fromPromise(promise)
     }
   }
 }
