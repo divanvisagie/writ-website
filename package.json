@@ -4,9 +4,8 @@
   "description": "ReactJS seed",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dev-server.js",
-    "build": "./node_modules/.bin/webpack"
+    "test": "./node_modules/.bin/webpack"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +27,7 @@
     "node-fetch": "^1.5.3",
     "react": "^15.2.0",
     "react-dom": "^15.2.0",
+    "react-router": "^2.5.2",
     "whatwg-fetch": "^1.0.0"
   }
 }

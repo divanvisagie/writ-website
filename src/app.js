@@ -1,24 +1,31 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import ContactsList from './components/contact-list/contact-list'
+import { render } from 'react-dom'
+import ContactList from './components/contact-list/contact-list'
+import Login from './components/login/login'
+import { Router, Route, Link, browserHistory } from 'react-router'
+import HttpService from './services/http-service/http-service'
 
-let contacts = [{
-  name: 'John',
-  phone: '555 123 5555'
-}, {
-  name: 'Mary',
-  phone: '555 456 5555'
-}]
+const httpService = new HttpService()
+let login = Login(httpService)
 
-class App extends React.Component {
+const App = React.createClass({
   render () {
     return (
       <div>
-        <h1>Contacts List</h1>
-        <ContactsList contacts={this.props.contacts} />
+        <h1>App page</h1>
+        <Link to='/login'>Login</Link>
+        <Link to='/contact-list'>ContactList</Link>
+        {this.props.children}
       </div>
     )
   }
-}
+})
 
-ReactDOM.render(<App contacts={contacts} />, document.getElementById('app'))
+render((
+  <Router history={browserHistory}>
+    <Route path='/' component={App}>
+      <Route path='login' component={login} />
+      <Route path='contact-list' component={ContactList} />
+    </Route>
+  </Router>
+), document.getElementById('app'))

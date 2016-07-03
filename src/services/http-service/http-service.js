@@ -1,3 +1,4 @@
+// let fetch = {}
 import path from 'path'
 import 'whatwg-fetch'
 import Bacon from 'baconjs'
@@ -14,21 +15,19 @@ function HttpService () {
     text: response => response.text()
   }
 
-  function get (url, type = 'json') {
-    let fetchPath = path.join(root, url)
-    const promise = fetch(fetchPath, settings)
-      .then(responseTypeMap[type])
-
-    //   console.log('resolving', fetchPath)
-    //   resolve(fetchPath)
-    // })
-
-    const stream = Bacon.fromPromise(promise)
-    return stream
-  }
-
   return {
-    get
+    get (url, type = 'json') {
+      let fetchPath = path.join(root, url)
+      const promise = fetch(fetchPath, settings)
+        .then(responseTypeMap[type])
+
+      const stream = Bacon.fromPromise(promise)
+      return stream
+    },
+
+    post (url, data, type = 'json') {
+      console.log(url, data)
+    }
   }
 }
 

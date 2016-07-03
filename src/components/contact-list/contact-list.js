@@ -5,16 +5,24 @@ import HttpService from '../../services/http-service/http-service'
 class ContactList extends React.Component {
   constructor (props) {
     super(props)
+
+    let contacts = [{
+      name: 'John',
+      phone: '555 123 5555'
+    }, {
+      name: 'Mary',
+      phone: '555 456 5555'
+    }]
+
     this.state = {
       search: '',
-      contacts: props.contacts
+      contacts: contacts
     }
 
     const httpService = HttpService()
     console.log('getting')
-    httpService.get('/ping','text')
+    httpService.get('/ping', 'text')
       .onValue(word => console.log(word))
-
   }
 
   updateSearch (event) {
